@@ -1,3 +1,5 @@
+const { fontFamily } = require('tailwindcss/defaultTheme');
+
 module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
 	theme: {
@@ -9,7 +11,7 @@ module.exports = {
       '2xl': '1536px'
     },
     fontFamily: {
-      display: ['inter', 'sans-serif']
+      display: ['Inter', ...fontFamily.sans],
     },
     letterSpacing: {
       tight: '-0.015em'
@@ -148,5 +150,6 @@ module.exports = {
       }
     }
   },
-  darkMode: 'class'
+  darkMode: 'class',
+  plugins: [require('@tailwindcss/typography')]
 }

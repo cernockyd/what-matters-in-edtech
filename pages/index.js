@@ -67,12 +67,12 @@ export default function PostPage({ source, frontMatter, toc }) {
 					<div className="mb-20">
             <h1 className="text-3xl font-bold text-red-600 mt-0">{frontMatter.title}</h1>
 							{frontMatter.description && (
-								<p className="text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-red-800 mt-0 pb-1">
+								<p className="text-5xl font-extrabold text-black mt-0 pb-1">
 									{frontMatter.description}
 								</p>
 							)}
 							{frontMatter.abstract && (
-								<p className="text-gray-700 pb-0">
+								<p className="text-gray-900 pb-0">
 									{frontMatter.abstract}
 								</p>
 							)}
@@ -146,7 +146,7 @@ export const getStaticProps = async ({ params }) => {
     .use(toc)
   let node = processor.parse(content)
   let tree = processor.runSync(node)
-  console.log(tree)
+  //console.log(tree)
   const mdxSource = await renderToString(content, {
     components,
     // Optionally pass remark/rehype plugins
