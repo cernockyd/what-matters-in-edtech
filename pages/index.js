@@ -66,17 +66,14 @@ export default function PostPage({ source, frontMatter, toc }) {
       <article className="docs-container relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
         <main className="max-w-screen-md mx-auto">
 					<div className="mb-20">
-            <h1 className="text-mb-0 font-semibold text-mahogany-500 text-4xl">{frontMatter.title}</h1>
+            <h1 className="text-3xl font-normal text-mahogany-400 mt-0">{frontMatter.title}</h1>
 							{frontMatter.description && (
 								<p className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-mahogany-300 to-mahogany-400 mt-0 pb-1">
 									{frontMatter.description}
 								</p>
 							)}
-							<p className="text-mahogany-500 mt-0 pb-0">
-								By Dalibor Cernocky, KISK FF MUNI	
-							</p>
 							{frontMatter.abstract && (
-								<p className="text-mahogany-500 mt-0 pb-0">
+								<p className="text-gray-800 pb-0">
 									{frontMatter.abstract}
 								</p>
 							)}
@@ -86,9 +83,9 @@ export default function PostPage({ source, frontMatter, toc }) {
       </article>
       <aside style={{top: '0rem', height: '100vh'}} className="h-screen bg-white dark:bg-dark flex-shrink-0 w-full md:w-64 md:block fixed md:sticky z-10 hidden">
         <div className="sidebar border-gray-200 dark:border-gray-900 w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto">
-          <div className="text-lg mb-4 text-mahogany-500 font-bold">
+          <div>
 						<Link href="/" passHref>
-							<a>{frontMatter.title}</a>
+							<a className="sidebar-title">{frontMatter.title}</a>
 						</Link>
           </div>
           <Scrollspy items={sections} currentClassName="active"> 
