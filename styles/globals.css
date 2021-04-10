@@ -103,10 +103,10 @@ a code {
   -webkit-touch-callout: none;
 }
 .sidebar .sidebar-title {
-  @apply text-lg mb-4 text-mahogany-400 font-normal;
+  @apply text-lg mb-4 text-red-600 font-semibold;
 }
 .dark .sidebar .sidebar-title {
-  @apply text-mahogany-400;
+  @apply text-red-400;
 }
 .dark .sidebar button,
 .dark .sidebar a {

@@ -1,4 +1,3 @@
-import fs from 'fs' 
 import Scrollspy from 'react-scrollspy'
 import matter from 'gray-matter'
 import unified from 'unified'
@@ -11,10 +10,9 @@ import slugify from 'slugify'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import path from 'path'
 import CustomLink from '../components/CustomLink'
 import Layout from '../components/Layout'
-import { postFilePaths, POSTS_PATH } from '../utils/mdxUtils'
+
 
 let si = 0
 
@@ -66,14 +64,14 @@ export default function PostPage({ source, frontMatter, toc }) {
       <article className="docs-container relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
         <main className="max-w-screen-md mx-auto">
 					<div className="mb-20">
-            <h1 className="text-3xl font-normal text-mahogany-400 mt-0">{frontMatter.title}</h1>
+            <h1 className="text-3xl font-bold text-red-600 mt-0">{frontMatter.title}</h1>
 							{frontMatter.description && (
-								<p className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-mahogany-300 to-mahogany-400 mt-0 pb-1">
+								<p className="text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-red-800 mt-0 pb-1">
 									{frontMatter.description}
 								</p>
 							)}
 							{frontMatter.abstract && (
-								<p className="text-gray-800 pb-0">
+								<p className="text-gray-700 pb-0">
 									{frontMatter.abstract}
 								</p>
 							)}
@@ -140,9 +138,10 @@ function list_to_tree(list) {
 }
 
 export const getStaticProps = async ({ params }) => {
-  const postFilePath = path.join(POSTS_PATH, `example-post.mdx`)
-  const source = fs.readFileSync(postFilePath)
-  const { content, data } = matter(source)
+  const source = await fetch(process.env.SITE_URL + '/api/mdx/example-post')
+  const sourcetext = await source.text()
+  console.log(sourcetext)
+  const { content, data } = matter(sourcetext)
   let processor = unified()
     .use(markdown, { commonmark: true })
     .use(toc)
@@ -168,18 +167,5 @@ export const getStaticProps = async ({ params }) => {
       frontMatter: data,
 			toc: tree,
     },
-  }
-}
-
-export const getStaticPaths = async () => {
-  const paths = postFilePaths
-    // Remove file extensions for page paths
-    .map((path) => path.replace(/\.mdx?$/, ''))
-    // Map the path into the static paths object required by Next.js
-    .map((slug) => ({ params: { slug } }))
-
-  return {
-    paths,
-    fallback: false,
   }
 }
