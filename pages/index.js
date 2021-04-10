@@ -1,4 +1,3 @@
-import Scrollspy from 'react-scrollspy'
 import matter from 'gray-matter'
 import unified from 'unified'
 import markdown from 'remark-parse'
@@ -13,15 +12,78 @@ import { useRouter } from 'next/router'
 import CustomLink from '../components/CustomLink'
 import fs from 'fs'
 import Layout from '../components/Layout'
+import React, { useEffect, useState } from "react";
 
+function getIds(items) {
+  return items.reduce((acc, item) => {
+    if (item.slug) {
+      // url has a # as first character, remove it to get the raw CSS-id
+      acc.push(item.slug);
+    }
+    if (item.children) {
+      acc.push(...getIds(item.children));
+    }
+    return acc;
+  }, []);
+}
 
-let si = 0
+function useActiveId(itemIds) {
+  const [activeId, setActiveId] = useState(`test`);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: `0% 0% -80% 0%` }
+    );
+    itemIds.forEach((id) => {
+      observer.observe(document.getElementById(id));
+    });
+    return () => {
+      itemIds.forEach((id) => {
+        observer.unobserve(document.getElementById(id));
+      });
+    };
+  }, [itemIds]);
+  console.log(activeId)
+  return activeId;
+}
 
-const CustomSection = ({ children, ...otherProps }) => {
-	si += 1
-	return (
-		<section id={"section-"+si}>{children}</section>
-	)	
+function renderItems(items, activeId) {
+  return (
+    <ul>
+      {items.map((item) => {
+        return (
+          <li
+            key={'#' + item.slug}
+            className={(
+              activeId === item.slug ? "active" : ""
+            )}
+          >
+            <a
+              href={'#' + item.slug}
+            >
+              {item.value}
+            </a>
+            {item.children && renderItems(item.children, activeId)}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+function TableOfContents(props) {
+  const idList = getIds(props.items);
+  console.log(idList)
+  const activeId = useActiveId(idList);
+  return (
+    renderItems(props.items, activeId)
+  );
 }
 
 // Custom components/renderers to pass to MDX.
@@ -30,8 +92,7 @@ const CustomSection = ({ children, ...otherProps }) => {
 // here.
 const components = {
   a: CustomLink,
-	section: CustomSection,
-  // It also works with dynamically-imported components, which is especially
+	// It also works with dynamically-imported components, which is especially
   // useful for conditionally loading components for certain routes.
   // See the notes in README.md for more details.
   TestComponent: dynamic(() => import('../components/TestComponent')),
@@ -44,11 +105,8 @@ function eachRecursive(list)
 	list.forEach(item => 
 		{
 			if (item.children.length)
-				sum += 1 + eachRecursive(item.children);
-			else
-				sum += 1
-			
-			item.section = sum
+				eachRecursive(item.children);			
+			item.slug = slugify(item.value, { lower: true, strict: true })
 		}
 	)
 	return sum
@@ -57,8 +115,7 @@ function eachRecursive(list)
 export default function PostPage({ source, frontMatter, toc }) {
   const content = hydrate(source, { components })
   const router = useRouter()
-	let sections = []
-  eachRecursive(toc) 
+	let sections = [] 
   return (
 		<div className="nextra-container main-container flex flex-col">
     <div className="flex flex-1 h-full">
@@ -87,55 +144,12 @@ export default function PostPage({ source, frontMatter, toc }) {
 							<a className="sidebar-title">{frontMatter.title}</a>
 						</Link>
           </div>
-          <Scrollspy items={sections} currentClassName="active"> 
-            {toc.map((item, i) => <li key={i}>
-              <Link passHref href={router.pathname+"#"+slugify(item.value, { lower: true, strict: true })}><a>{item.value}</a></Link>
-							<ul>
-							{item.children.map((child, e) => (
-								<li key={e}>
-									<Link href={router.pathname+"#"+slugify(child.value, { lower: true, strict: true })}><a>{child.value}</a></Link>
-									<ul>
-									{child.children.map((subchild, k) => (
-										<li key={k}>
-											<Link href={router.pathname+"#"+slugify(subchild.value, { lower: true, strict: true })}><a>{subchild.value}</a></Link>
-										</li>
-									))}	
-									</ul>
-								</li>
-							))}	
-							</ul>
-            </li>)}
-          </Scrollspy>
+          <TableOfContents items={toc} />
         </div>
       </aside>
     </div>
     </div>
   )
-}
-
-function list_to_tree(list) {
-  var map = {}, node, roots = [], i;
-  
-	const headingText = list[i][2].trim()
-	const level = list[i][1].trim() === '##' ? 1 : 2 
-	const headingLink = slugify(headingText, { lower: true, strict: true })
-	
-  for (i = 0; i < list.length; i += 1) {
-    map[headingLink] = i; // initialize the map
-    list[i].children = []; // initialize the children
-  }
-  
-  for (i = 0; i < list.length; i += 1) {
-    node = list[i];
-    if (node.parentId !== "0") {
-      // if you have dangling branches check that map[node.parentId] exists
-      list[map[node.parentId]].children.push(node);
-    } else {
-      roots.push(node);
-    }
-  }
-  //console.log(roots)
-  return roots;
 }
 
 export const getStaticProps = async ({ params }) => {
@@ -147,13 +161,14 @@ export const getStaticProps = async ({ params }) => {
   let node = processor.parse(content)
   let tree = processor.runSync(node)
   //console.log(tree)
+  eachRecursive(tree)
   const mdxSource = await renderToString(content, {
     components,
     // Optionally pass remark/rehype plugins
     mdxOptions: {
       remarkPlugins: [
         require('remark-slug'),
-        require('remark-sectionize'),
+        //require('remark-autolink-headings'),
       ],
       rehypePlugins: [],
     },

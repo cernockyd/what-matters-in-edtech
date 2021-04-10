@@ -99,11 +99,14 @@ a code {
 .sidebar .active-anchor {
   @apply font-semibold text-gray-900 dark:text-white;
 }
+.sidebar li > a {
+  @apply font-medium;
+}
 .sidebar li.active > a {
-  @apply font-semibold text-black bg-gray-200;
+  @apply text-black;
 }
 .dark .sidebar li.active > a {
-  @apply text-white bg-gray-800;
+  @apply text-white;
 }
 .sidebar button,
 .sidebar a {
