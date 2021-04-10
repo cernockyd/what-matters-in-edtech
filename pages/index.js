@@ -11,6 +11,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import CustomLink from '../components/CustomLink'
+import fs from 'fs'
 import Layout from '../components/Layout'
 
 
@@ -138,10 +139,8 @@ function list_to_tree(list) {
 }
 
 export const getStaticProps = async ({ params }) => {
-  const source = await fetch(process.env.SITE_URL + '/api/mdx/example-post')
-  const sourcetext = await source.text()
-  console.log(sourcetext)
-  const { content, data } = matter(sourcetext)
+  const source = fs.readFileSync('posts/example-post.mdx')
+  const { content, data } = matter(source)
   let processor = unified()
     .use(markdown, { commonmark: true })
     .use(toc)
