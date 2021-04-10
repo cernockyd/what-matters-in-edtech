@@ -11,7 +11,7 @@ module.exports = {
       '2xl': '1536px'
     },
     fontFamily: {
-      display: ['Inter', ...fontFamily.sans],
+      sans: ['Inter', ...fontFamily.sans],
     },
     letterSpacing: {
       tight: '-0.015em'
