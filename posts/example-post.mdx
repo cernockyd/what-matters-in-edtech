@@ -136,11 +136,18 @@ The main objective of the research is thus to identify the trends among the lead
 
 #### Data source
 
-I obtained a dataset of funding rounds using export feature from Crunchbase which is a platform for finding business information about private and public companies. The platform originated from Techcrunch and is now a private entity. There is a discussion on using Crunchbase in academic research. 
+Finding information about private companies is challenging. The author decided to leverage the database of innovative companies "maintained by Crunchbase Inc. a company founded in 2007 by Michael Arrington and located in San Francisco, California". The company, now being an independent entity is a former branch of a parent company TechCrunch Inc. "a popular online publication". (Ferrati & Muffatto, 2020)
 
-There are ~ 4,377 funding rounds for companies classified in the edtech industry while 3,261 of them have defined funding amount.
+The database is increasingly used by the venture capital industry. Between researchers and scholars, the database is increasingly popular "as a source of information on start-up activity and financing within and across countries", "more than 90 scientific contributions based on its data have been made available so far." Some of the academic articles are already published in top-tier journals. (Using Crunchbase for Economic and Managerial Research, 2017)
 
-`The problem of classification in the CB`
+The Crunchbase data is mainly entered on a voluntary basis, the scope and coverage of the database are not precisely defined. (Ferrati & Muffatto, 2020; Using Crunchbase for Economic and Managerial Research, 2017) Crunchbase data collection consists of 4 activities: 1) "more than 3,700 investment firms submit monthly portfolio updates", 2) active community of executives, entrepreneurs, and investors contributing, 3) Crunchbase AI and ML algorithms validate data and search for anomalies, 4) Crunchbase in-house data science team provide manual data validation and curation of collected data and develops algorithms. (‘The Crunchbase Data Difference’, 2017; Ferrati & Muffatto, 2020)
+
+ The "aggregate statistics on VC funding by country and year tend to be reasonably similar to the same figures produced with an alternative and more established source". Compared to other alternatives, the Crunchbase database "does not require a huge amount of data handling before it can be used for econometric analysis". (Using Crunchbase for Economic and Managerial Research, 2017)
+
+As of May 21, 2019, the Crunchbase corpus contained a total of 760,590 records in the Organisation’s dataset and 263,426 records in the Funding rounds dataset. Of the total number of companies approximately 79.9% do not declare any funding round, 5.5% have at least one funding round without funding amount specified and 14.6% have at least one funding round and are declaring the total funding amount. (Ferrati & Muffatto, 2020) The platform allows users to filter companies and funding rounds by industries. A brief database query was resolved with ~ 4,377 funding rounds for companies classified in the EdTech industry, while 3,261 of them have defined funding amount.  
+
+The dataset of funding rounds for further analysis was obtained using an export feature from the database which returns a .csv file corresponding to a selected query. Since the platform proclaims an export limit of 500 items per request, the author obtained the dataset in chucks to prevent hitting the limit and then constructed the dataset by concatenating the .csv files.
+
 
 #### Data processing
 
