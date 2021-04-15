@@ -54,6 +54,8 @@ function useActiveId(itemIds) {
 }
 
 function renderItems(items, activeId, depth) {
+  if (depth >= 5)
+    return null
   return (
     <ul className={"depth-"+depth}>
       {items.map((item) => {
