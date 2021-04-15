@@ -22,7 +22,7 @@ This work aims to distil the most notable trends in the edtech industry and show
 - [[This work aims to distill what matters in EdTech]]
 
 
-## What is EdTech
+# Understanding EdTech
 
 The definition of education builds on the core which is "learning" however it does not include only the facilitation of persons learning. Instead, we must acknowledge the social aspects of education as an organization, educational institutions and a wider social context that takes place in one's learning. "As a whole, then, the term ‘education’ can be best understood as the conditions and arrangements where learning takes place." (Selwyn, 2017)
 
@@ -47,17 +47,28 @@ Lievrouw and Livingstone include and conceptualize the social aspects in the def
 	- [[Edtech software domains]]
 	- [learning landscape]
 
-## Revisiting the purpose of education
+# The context
+
+## Purpose of education
 
 `educated free citizen X economic perspective`
 
-### Digital transformation driving change in education
+## Digital transformation
 
-Novelty and trends are by definition observed via change or difference in time. The general impact of technology on education will be derived from the digital revolution's and the digital transformation's implications. Digital transformation drives the economy towards industry 4.0, which builds heavily on using technology to mass production and making informed decisions in the world of big data. Another challenge that digital transformation imposes is the information revolution describing the technology as being closer to humans. Its position transforms from being a mere tool to becoming an equal partner. The pursuit of alignment of technology and society or harmony between technology and society is described by Society 5.0.
+"Research has shown that technology itself is only part of the complex puzzle that must be solved for organizations to remain competitive in a digital world" (Vial, 2019) Since digitalization leads to change of a business conditions, digitalization is usually the main driver of digital transformation. (Pousttchi, 2017)
 
-To note the impact of technology in education, we need to understand these phenomena in slightly greater detail, we first need to understand the characteristics of technology on human civilization throughout history and what we mean by the digital revolution. 
+“There is no comonly accepted definition of digital transformation”. (Schallmo et al., 2017) A concievable description of the term may be "significant active changes in everyday life, the economy and society through the use of digital technologies and techniques and their effects." (Pousttchi, 2017) Based on existing definitions, Vial (2019) developed a conceptual definition of digital transformation as “a process that aims to improve an entity by triggering significant changes to its properties through combinations of information, computing, communication, and connectivity technologies”. 
 
-#### Historical perspective
+The term digitalization is known to be sometimes used with the meaning of digital transformation. (Hess et al., 2016) It is important to note the indirectly mentioned fact from the work of Pousttchi (2017), that increase of digital technology usage or digitalization alone, do not imply the presence of digital transformation in its full range and potential.
+
+The pursue towards understanding DT and its implications is reflected in management, leadership and business. () The topic of digital transformation and more precisely the question of "how to embrace it and use it as a competitive advantage" is considered as one of the biggest challenges companies currently face. (Hess et al., 2016)
+
+In the organizational setting the DT is "reflected in the change of entire business models brought about by digital technologies". (Hess et al., 2016) 
+
+As Vial's (2019) conceptual definition reffers DT to any entity, the process of DT applies to organizations and companies as well as individuals. 
+
+
+## Historical perspective
 
 "Technology dominates and defines civilisation. Our commonest taxonomy of civilisation is a recognition of the role different technologies play in human life: the Stone Age, Bronze Age and Iron Age of archaeologists; the industrialised Steam, Oil, and now Silicon Age" (Bondyopadhyay, 1998).
 
@@ -69,7 +80,7 @@ Among the drivers of education  Digital transformation "a process that aims to i
 
 One of the main characteristics of digital transformation and industrial revolution 4.0. is observed exponencial growth and associated compounding effect.
 
-#### Implications of digital transformation for education
+## Implications for education
 
 A shorter skill/information lifespan
 Updating core skills
@@ -85,7 +96,6 @@ Supporting teaching and learning
 Digital devide
 Marginalized nations and groups
 
-
 - [[Digital transformation drives economic transition and information society]]
 - `?` Gig economy
 - Technology challenges what we should learn in the first place
@@ -93,7 +103,7 @@ Marginalized nations and groups
 - Competencies for 21. century 
 - Lifelong learning/soulcare
 
-## Innovation and startups in EdTech
+## What is a startup 
 
 In his essay, Paul Graham defines startup as "a company that is designed to grow rapidly." "A startup has to make something it can deliver to a large market, and ideas of that type are so valuable that all the obvious ones are already taken." Most startups fail.
 
@@ -103,9 +113,9 @@ In his essay, Paul Graham defines startup as "a company that is designed to grow
 - funding ecosystem
 - VCs and market efficiency - does investment reflect potential value?
 
-# The story
+## Fallacy of distruption
 
-## Notable signals from global education data sources
+# Global education data sources
 -   [http://uis.unesco.org/](http://uis.unesco.org/)
     -   Pupil teacher ratio by level of education
     -   School life expectancy by level of education
@@ -120,7 +130,9 @@ In his essay, Paul Graham defines startup as "a company that is designed to grow
     -   Educational personnel by age
     -   Enrolment by field
 
-##  Mapping edtech startups
+# Mapping edtech trends
+
+## Objectives
 
 In order to show the most notable trends within the EdTech industry, the author decided to look at startups operating in the industry. As described in theory startups being designed to grow rapidly, should aim to solve the biggest, hardest and most recurring problems.
 
@@ -128,13 +140,13 @@ The author assumes that investing rounds of startups and raised capital may refl
 
 Another assumption being made is that education systems are havily dependent on the region. 
 
-### Objectives
+
 
 The main objective of the research is thus to identify the trends among the leading companies as grouped by continents.
 
-### Methodology
+## Methodology
 
-#### Data source
+### Data source
 
 Finding information about private companies is challenging. The author decided to leverage the database of innovative companies "maintained by Crunchbase Inc. a company founded in 2007 by Michael Arrington and located in San Francisco, California". The company, now being an independent entity is a former branch of a parent company TechCrunch Inc. "a popular online publication". (Ferrati & Muffatto, 2020)
 
@@ -149,7 +161,7 @@ As of May 21, 2019, the Crunchbase corpus contained a total of 760,590 records i
 The dataset of funding rounds for further analysis was obtained using an export feature from the database which returns a .csv file corresponding to a selected query. Since the platform proclaims an export limit of 500 items per request, the author obtained the dataset in chucks to prevent hitting the limit and then constructed the dataset by concatenating the .csv files.
 
 
-#### Data processing
+### Data processing
 
 The data processing was done using Python3 and popular data science SciPy libraries namely:
 - NumPy: "the fundamental package for numerical computation. It defines the numerical array and matrix types and basic operations on them."
@@ -162,15 +174,15 @@ I've tried to investigate the possibility of automatic company classification us
 
 Raised capital amounts we converted to current value `for which date?` and US dollars in order to be comparable.
 
-### Analysis
+## Analysis
 
+ 
 
-
-### Discussion
+## Discussion
 - [[Working with crunchbase dataset]]
 - Company classification
 
-# Working notes
+# Conclusion
 - [[Reading reports]]
 - [[Data sources on global education]]
 

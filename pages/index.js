@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import CustomLink from '../components/CustomLink'
 import fs from 'fs'
 import Layout from '../components/Layout'
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
 function getIds(items) {
   return items.reduce((acc, item) => {
@@ -53,23 +53,21 @@ function useActiveId(itemIds) {
   return activeId;
 }
 
-function renderItems(items, activeId) {
+function renderItems(items, activeId, depth) {
   return (
-    <ul>
+    <ul className={"depth-"+depth}>
       {items.map((item) => {
         return (
           <li
             key={'#' + item.slug}
-            className={(
-              activeId === item.slug ? "active" : ""
-            )}
+            className={activeId === item.slug ? "active" : ""}
           >
             <a
               href={'#' + item.slug}
             >
               {item.value}
             </a>
-            {item.children && renderItems(item.children, activeId)}
+            {item.children && renderItems(item.children, activeId, depth+1)}
           </li>
         );
       })}
@@ -82,7 +80,7 @@ function TableOfContents(props) {
   console.log(idList)
   const activeId = useActiveId(idList);
   return (
-    renderItems(props.items, activeId)
+    renderItems(props.items, activeId, 1)
   );
 }
 
@@ -114,30 +112,19 @@ function eachRecursive(list)
 
 export default function PostPage({ source, frontMatter, toc }) {
   const content = hydrate(source, { components })
-  const router = useRouter()
-	let sections = [] 
   return (
-		<div className="nextra-container main-container flex flex-col">
+    <Fragment>
+		<div className="main-container flex justify-center items-center flex-col">
+        <h1 className="text-black text-8xl font-bold max-w-screen-md text-center">{frontMatter.title}</h1>
+        {frontMatter.description && (
+          <h2 className="text-2xl text-black mt-4 pb-6 text-center">
+            {frontMatter.description}
+          </h2>
+        )}
+    </div>
+    <div className="nextra-container main-container flex flex-col">
     <div className="flex flex-1 h-full">
-      <article className="docs-container relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
-        <main className="max-w-screen-md mx-auto">
-					<div className="mb-20">
-            <h1 className="text-3xl font-bold text-red-600 mt-0">{frontMatter.title}</h1>
-							{frontMatter.description && (
-								<p className="text-5xl font-extrabold text-black mt-0 pb-1">
-									{frontMatter.description}
-								</p>
-							)}
-							{frontMatter.abstract && (
-								<p className="text-gray-900 pb-0">
-									{frontMatter.abstract}
-								</p>
-							)}
-						</div>
-          {content}
-        </main>
-      </article>
-      <aside style={{top: '0rem', height: '100vh'}} className="h-screen bg-white dark:bg-dark flex-shrink-0 w-full md:w-64 md:block fixed md:sticky z-10 hidden">
+    <aside style={{top: '0rem', height: '100vh'}} className="h-screen bg-white dark:bg-dark flex-shrink-0 w-full md:w-64 md:block fixed md:sticky z-10 hidden">
         <div className="sidebar border-gray-200 dark:border-gray-900 w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto">
           <div>
 						<Link href="/" passHref>
@@ -147,8 +134,14 @@ export default function PostPage({ source, frontMatter, toc }) {
           <TableOfContents items={toc} />
         </div>
       </aside>
+      <article className="docs-container prose prose-lg relative pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
+        <main className="max-w-screen-md mx-auto">
+          {content}
+        </main>
+      </article>
     </div>
     </div>
+    </Fragment>
   )
 }
 
