@@ -27,6 +27,19 @@ function getIds(items) {
   }, []);
 }
 
+function getHeadings(items) {
+  return items.reduce((acc, item) => {
+    if (item.value) {
+      // url has a # as first character, remove it to get the raw CSS-id
+      acc[item.slug] = item.value;
+    }
+    if (item.children) {
+      acc = {...acc, ...getHeadings(item.children)};
+    }
+    return acc;
+  }, {});
+}
+
 function useActiveId(itemIds) {
   const [activeId, setActiveId] = useState(`test`);
   useEffect(() => {
@@ -77,12 +90,10 @@ function renderItems(items, activeId, depth) {
   );
 }
 
-function TableOfContents(props) {
-  const idList = getIds(props.items);
-  console.log(idList)
-  const activeId = useActiveId(idList);
+function TableOfContents({activeId, items}) {
+  //console.log(idList)
   return (
-    renderItems(props.items, activeId, 1)
+    renderItems(items, activeId, 1)
   );
 }
 
@@ -114,6 +125,9 @@ function eachRecursive(list)
 
 export default function PostPage({ source, frontMatter, toc }) {
   const content = hydrate(source, { components })
+  const idList = getIds(toc);
+  const headingsList = getHeadings(toc);
+  const activeId = useActiveId(idList);
   return (
     <Fragment>
 		<div className="main-container flex justify-center items-center flex-col">
@@ -128,19 +142,24 @@ export default function PostPage({ source, frontMatter, toc }) {
     <div className="flex flex-1 h-full">
     <aside style={{top: '0rem', height: '100vh'}} className="h-screen bg-white dark:bg-dark flex-shrink-0 w-full md:w-64 md:block fixed md:sticky z-10 hidden">
         <div className="sidebar border-gray-200 dark:border-gray-900 w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto">
-          <div>
-						<Link href="/" passHref>
-							<a className="sidebar-title">{frontMatter.title}</a>
-						</Link>
-          </div>
-          <TableOfContents items={toc} />
+          <TableOfContents items={toc} activeId={activeId} />
         </div>
       </aside>
-      <article className="docs-container prose prose-lg relative pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
-        <main className="max-w-screen-md mx-auto">
-          {content}
-        </main>
-      </article>
+      <div>
+        <nav class="flex items-center bg-white z-20 md:sticky top-0 left-0 right-0 h-14 px-6 dark:bg-dark dark:border-gray-900">
+          <Link href={"/"} passHref>
+            <a className="text-lg text-bold text-gray-600">{frontMatter.title} # </a>
+          </Link>          
+          <Link href={"/#"+activeId} passHref>
+            <a className="text-lg text-bold text-black ml-2 font-bold">{' '} {headingsList[activeId]}</a>
+          </Link>          
+        </nav>
+        <article className="docs-container prose prose-lg relative pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
+          <main className="max-w-screen-md mx-auto">
+            {content}
+          </main>
+        </article>
+      </div>
     </div>
     </div>
     </Fragment>
