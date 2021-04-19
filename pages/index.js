@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import CustomLink from '../components/CustomLink'
 import fs from 'fs'
+import Image from 'next/image'
 import Layout from '../components/Layout'
 import React, { Fragment, useEffect, useState } from "react";
 
@@ -107,6 +108,7 @@ const components = {
   // useful for conditionally loading components for certain routes.
   // See the notes in README.md for more details.
   TestComponent: dynamic(() => import('../components/TestComponent')),
+  Image: Image,
   Head,
 }
 
@@ -146,12 +148,9 @@ export default function PostPage({ source, frontMatter, toc }) {
         </div>
       </aside>
       <div>
-        <nav class="flex items-center bg-white z-20 md:sticky top-0 left-0 right-0 h-14 px-6 dark:bg-dark dark:border-gray-900">
-          <Link href={"/"} passHref>
-            <a className="text-lg text-bold text-gray-600">{frontMatter.title} # </a>
-          </Link>          
+        <nav class="flex items-center bg-white z-20 md:sticky top-0 left-0 right-0 h-14 px-6 dark:bg-dark dark:border-gray-900"> 
           <Link href={"/#"+activeId} passHref>
-            <a className="text-lg text-bold text-black ml-2 font-bold">{' '} {headingsList[activeId]}</a>
+            <a className="text-base text-bold text-black ml-2 font-bold">{' '} {headingsList[activeId]}</a>
           </Link>          
         </nav>
         <article className="docs-container prose prose-lg relative pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
