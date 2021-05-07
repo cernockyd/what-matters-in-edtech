@@ -8,11 +8,18 @@
     "start": "next start"
   },
   "dependencies": {
+    "@mapbox/rehype-prism": "^0.6.0",
     "@tailwindcss/jit": "^0.1.18",
     "@tailwindcss/typography": "^0.4.0",
+    "@vercel/fetch": "^6.1.0",
     "autoprefixer": "^10.2.5",
+    "cheerio": "*",
+    "date-fns": "^2.21.2",
+    "dgram": "^1.0.1",
+    "dns": "^0.2.2",
     "gatsby-remark-tufte": "^1.0.6",
     "gray-matter": "^4.0.2",
+    "hast-util-sanitize": "^4.0.0",
     "next": "^10.0.8",
     "next-mdx-remote": "^1.0.0",
     "next-remote-watch": "0.2.0",
@@ -20,15 +27,22 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scrollspy": "^3.4.3",
+    "react-static-tweets": "^0.5.3",
+    "rehype-parse": "^7.0.1",
+    "rehype-raw": "^5.1.0",
+    "rehype-sanitize": "^4.0.0",
     "remark-autolink-headings": "^6.0.1",
     "remark-extract-toc": "^1.1.0",
     "remark-footnotes": "^3.0.0",
     "remark-parse": "^9.0.0",
+    "remark-rehype": "^8.1.0",
     "remark-sectionize": "^1.1.1",
     "remark-slug": "^6.0.0",
     "slugify": "^1.4.7",
+    "static-tweets": "^0.5.3",
     "tailwindcss": "^2.1.1",
-    "unified": "^9.2.1"
+    "unified": "^9.2.1",
+    "xtend": "^4.0.2"
   },
   "license": "MIT"
 }

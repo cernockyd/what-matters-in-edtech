@@ -25,21 +25,18 @@ const components = {
   Head,
 }
 
-export default function PostPage({ source, frontMatter, toc }) {
+export default function PostPage({ source, frontMatter }) {
   const content = hydrate(source, { components })
   const router = useRouter()
   console.log(router)
   return (
-    <Layout>
+    <div className="nextra-container main-container flex flex-col">
       <header>
         <nav>
           <Link href="/">
             <a>👈 Go back home</a>
           </Link>
         </nav>
-        <ul>
-          {toc.map((item, i) => <li key={i}><Link href={"/posts/"+router.query.slug+item.link}><a>{item.title}</a></Link></li>)}
-        </ul>
       </header>
       <div className="post-header">
         <h1>{frontMatter.title}</h1>
@@ -47,44 +44,9 @@ export default function PostPage({ source, frontMatter, toc }) {
           <p className="description">{frontMatter.description}</p>
         )}
       </div>
-      <main>{content}</main>
-
-      <style jsx>{`
-        .post-header h1 {
-          margin-bottom: 0;
-        }
-
-        .post-header {
-          margin-bottom: 2rem;
-        }
-        .description {
-          opacity: 0.6;
-        }
-      `}</style>
-    </Layout>
+      <main className="max-w-screen-md mx-auto">{content}</main>
+    </div>
   )
-}
-
-export function getTableOfContents(content) {
-  const regexp = new RegExp(/^(### |## )(.*)\n/, 'gm')
-  const headings = [...content.matchAll(regexp)]
-
-  let tableOfContents = []
-
-  if (headings.length) {
-    tableOfContents = headings.map((heading) => {
-      const headingText = heading[2].trim()
-      const headingType = heading[1].trim() === '##' ? 'h2' : 'h3'
-      const headingLink = slugify(headingText, { lower: true, strict: true })
-
-      return {
-        title: headingType === 'h2' ? headingText : `- ${headingText}`,
-        link: `#${headingLink}`,
-      }
-    })
-  }
-
-  return tableOfContents
 }
 
 export const getStaticProps = async ({ params }) => {
@@ -92,7 +54,6 @@ export const getStaticProps = async ({ params }) => {
   const source = fs.readFileSync(postFilePath)
 
   const { content, data } = matter(source)
-	const tableOfContents = getTableOfContents(content)
   const mdxSource = await renderToString(content, {
     components,
     // Optionally pass remark/rehype plugins
@@ -108,8 +69,7 @@ export const getStaticProps = async ({ params }) => {
   return {
     props: {
       source: mdxSource,
-      frontMatter: data,
-			toc: tableOfContents,
+      frontMatter: data
     },
   }
 }

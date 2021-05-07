@@ -147,9 +147,39 @@ module.exports = {
     extend: {
       colors: {
         dark: '#111'
+      },
+			typography: {
+        DEFAULT: {
+          css: {
+            color: '#000',
+            a: {
+              color: '#2b7bb9',
+              '&:hover': {
+                color: '#3b94d9',
+              },
+            },
+						p: {
+							color: '#000',
+							fontSize: '1.125rem',
+							lineHeight: '1.65',
+							marginBottom: '1.5em',
+						},
+						h1: {
+							fontWeight: 700,
+							fontSize: '2.5rem',
+							marginBottom: '1.2em',
+						},
+						h2: {
+							fontWeight: 600,
+						},
+						h3: {
+							fontWeight: 600,
+						},
+          },
+        },
       }
     }
   },
   darkMode: 'class',
-  //plugins: [require('@tailwindcss/typography')]
+  plugins: [require('@tailwindcss/typography')]
 }
