@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { Tweet } from 'react-static-tweets'
 
 const Page = () => (
     <div className="flex flex-col px-3">
@@ -12,34 +11,56 @@ const Page = () => (
         <h1>Towards open research</h1>
         <h2>The rise of independent researchers</h2>
         <p>
-          I am very close to the trend of developers who are able to develop various flagship projects with the support of the community. Recently, I have noticed that there are cases of researchers who, similarly, took the bet and try to do their research on their own. 
+          As a person from the open source community, which is able to develop various flagship projects with the support of the community, I don't understand the publishing model held by monopols in the research sphere.
         </p>
         <p>
-					Instead of convincing buch of people on the university, they have to convince many lay people, who perhaps are not experts in the field, but may want to back the research anyway.
+          There seems to be a lot of inefficiency driven by such model and I know, that in the long term, efficiency is something you cant forego. 
         </p>
         <p>
-          Both cases of academy and independece are a space of big tradeoffs. For example, independend research will less likely cover the hard, abstract problems, which are too distant for the lay people. 
+          Recently, I have noticed that there are cases of researchers who took the bet and try to do research on their own. Instead of convincing bunch of people on the university, they have to convince many in the lay audience, who perhaps are not experts in the field, but may want to support the research anyway.
         </p>
-				<Tweet id="1389972119719616512" />
+        <p>
+          Both cases of academy and independece are a spaces of big tradeoffs. For example, independend research will less likely cover the abstract problems, which are too distant for the audience. However, both academy and independent paths are meaningful and together create an interesting combination.
+        </p>
+        <blockquote>
+          Orbit is open-source: https://github.com/andymatuschak/orbit…        
+
+          I did this because my crowdfunding now feels increasingly solid. Patrons provide >2/3 of an NSF CAREER grant (a common "starter" grant in science). Made a (public) video reflecting on CAREER vs crowdfunding:
+        </blockquote>
 				<>Andy Matuschak, describes the pros and cons of being independent researcher.</>
-				<p>
-					However, both academy and independent paths are meaningful and together create great combination.
-				</p>
         <p>
-          So one of my theses is that there will be more people interested in the independent research in the future. 
+          Independent scientific research is <a href="https://en.wikipedia.org/wiki/Independent_scientist">not new</a>, but but appears to be increasingly more approachable and natural. So one of my theses is that there will be more people interested in the independent research in the future. 
         </p>
         <p>
-          Assuming such trend will grow, couple of questions popup around the idea. How will such model stay sustainable? Will some kind of structure emerge around this trend, which will make it be more convenient?
+          Assuming such trend will grow, couple of questions popup around the idea. How will such model stay sustainable? What will emerge around this trend? How to make it be more trouble-free for all participants?
         </p>
-        <h2>Lowering unnnecessary entry barriers</h2>
-				<Tweet id="1375596258023370755" />
+        <p>
+          The problem space opened by these questions is huge and of course has been recurrently rediscovered by many. However, I will provide clues and interesting opportunities towards open research.
+        </p>
+        <h2>Web is the medium</h2>
+        <p>Open access is not only about free access.</p>
+        <h3>Machine readability</h3>
+        <p>
+          Good human access means good machine access
+        </p>
+        <h2>Rich human interaction</h2>
+        <h2></h2>
+        <h3>URL as an identifier</h3>
         <h2>Transparency and Replicability</h2>
-				<Tweet id="1375596258023370755" />
-        <h2>Leveraging the web</h2>
+        <h2>Analytics</h2>
+        <p>
+          Of course using web as a main medium allows to leverage existing state-of-the art analytics and telemetry tools. While privacy may be the concern for some, not all telemetry options cause privacy risks.
+        </p>
+        <p>
+          Consider the automated web page quality evaluation brought by Lighthouse (open source tool developed by Google Chrome). Lighthouse evaluates web a given web page for various metrics: performance, accessibility, SEO, and more.
+        </p>
+        <p>
+          While these metrics are  
+        </p>
+        <h2>Versioning</h2>
 				<p>
 					While these are 
 				</p>
-				<Tweet id="1304450907921285121" />
         <h2>Long term dialogue</h2>
         <p>
           I have a dream in which the diploma thesis and other academic papers are not stored on servers in PDFs, but instead are accessible 1) for human readers in the format that belongs to the current age, ie as an interactive website, 2) for computer robots in some well structured format. This applies for synthesizing papers as well as to data and code attached to them.

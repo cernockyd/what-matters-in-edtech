@@ -15,6 +15,12 @@ import Image from 'next/image'
 import Layout from '../components/Layout'
 import React, { Fragment, useEffect, useState } from "react";
 
+const Citation = (props) => {
+  return (
+    <span className="text-gray-600">({props.author}, {props.year})</span>
+  )
+}
+
 function getIds(items) {
   return items.reduce((acc, item) => {
     if (item.slug) {
@@ -108,6 +114,7 @@ const components = {
   // useful for conditionally loading components for certain routes.
   // See the notes in README.md for more details.
   TestComponent: dynamic(() => import('../components/TestComponent')),
+  Citation: Citation,
   Image: Image,
   Head,
 }
@@ -141,24 +148,19 @@ export default function PostPage({ source, frontMatter, toc }) {
         )}
     </div>
     <div className="nextra-container main-container flex flex-col">
-    <div className="flex flex-1 h-full">
-    <aside style={{top: '0rem', height: '100vh'}} className="h-screen bg-white dark:bg-dark flex-shrink-0 w-full md:w-64 md:block fixed md:sticky z-10 hidden">
-        <div className="sidebar border-gray-200 dark:border-gray-900 w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto">
-          <TableOfContents items={toc} activeId={activeId} />
-        </div>
-      </aside>
+    <div className="flex flex-1 h-full justify-end">
       <div>
-        <nav class="flex items-center bg-white z-20 md:sticky top-0 left-0 right-0 h-14 px-6 dark:bg-dark dark:border-gray-900"> 
-          <Link href={"/#"+activeId} passHref>
-            <a className="text-base text-bold text-black ml-2 font-bold">{' '} {headingsList[activeId]}</a>
-          </Link>          
-        </nav>
-        <article className="docs-container prose prose-lg relative pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
-          <main className="max-w-screen-md mx-auto">
+        <article className="docs-container prose relative pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
+          <main className="max-w-screen-sm mx-auto">
             {content}
           </main>
         </article>
       </div>
+      <aside style={{top: '0rem', height: '100vh'}} className="h-screen bg-white dark:bg-dark flex-shrink-0 w-full md:w-64 md:block fixed md:sticky z-10 hidden">
+        <div className="sidebar border-gray-200 dark:border-gray-900 w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto">
+        <TableOfContents items={toc} activeId={activeId} />
+        </div>
+      </aside>
     </div>
     </div>
     </Fragment>
