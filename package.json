@@ -28,6 +28,7 @@
     "react-dom": "^16.13.1",
     "react-scrollspy": "^3.4.3",
     "react-static-tweets": "^0.5.3",
+    "react-use-clipboard": "1.0.7",
     "rehype-parse": "^7.0.1",
     "rehype-raw": "^5.1.0",
     "rehype-sanitize": "^4.0.0",

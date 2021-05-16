@@ -13,7 +13,28 @@ import CustomLink from '../components/CustomLink'
 import fs from 'fs'
 import Image from 'next/image'
 import Layout from '../components/Layout'
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react"
+import useClipboard from "react-use-clipboard"
+
+const SITE_URL = 'http://edtech-one.vercel.app'
+
+const Heading = (props) => {
+  // To add typescript typing visit https://stackoverflow.com/a/59685929
+  const HeadingTag = `h${props.level}`;
+  const [isCopied, setCopied] = useClipboard(SITE_URL+"#"+props.id, {
+    successDuration: 1000
+  })
+  return (
+    <HeadingTag id={props.id}>
+      {props.children}
+      <a 
+        onClick={setCopied} 
+        className={"copy-to-clipboard" + (isCopied ? " copied" : "")}
+      >
+      </a>
+    </HeadingTag>
+  )
+}
 
 const Citation = (props) => {
   return (
@@ -115,6 +136,12 @@ const components = {
   // See the notes in README.md for more details.
   TestComponent: dynamic(() => import('../components/TestComponent')),
   Citation: Citation,
+  h1: (props) => <Heading level="1" {...props} />,
+  h2: (props) => <Heading level="2" {...props} />,
+  h3: (props) => <Heading level="3" {...props} />,
+  h4: (props) => <Heading level="4" {...props} />,
+  h5: (props) => <Heading level="5" {...props} />,
+  h6: (props) => <Heading level="6" {...props} />,
   Image: Image,
   Head,
 }
@@ -140,11 +167,11 @@ export default function PostPage({ source, frontMatter, toc }) {
   return (
     <Fragment>
 		<div className="main-container flex justify-center items-center flex-col">
-        <h1 className="text-black text-8xl font-bold max-w-screen-md text-center">{frontMatter.title}</h1>
+        <h1 className="text-black text-6xl font-bold max-w-screen-md text-center">{frontMatter.title}</h1>
         {frontMatter.description && (
-          <h2 className="text-2xl text-black mt-4 pb-6 text-center">
+          <p className="text-xl text-black mt-4 pb-6 text-center">
             {frontMatter.description}
-          </h2>
+          </p>
         )}
     </div>
     <div className="nextra-container main-container flex flex-col">
@@ -168,7 +195,7 @@ export default function PostPage({ source, frontMatter, toc }) {
 }
 
 export const getStaticProps = async ({ params }) => {
-  const source = fs.readFileSync('posts/example-post.mdx')
+  const source = fs.readFileSync('content/index.mdx')
   const { content, data } = matter(source)
   let processor = unified()
     .use(markdown, { commonmark: true })
