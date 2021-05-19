@@ -21,17 +21,13 @@ const SITE_URL = 'http://edtech-one.vercel.app'
 const Heading = (props) => {
   // To add typescript typing visit https://stackoverflow.com/a/59685929
   const HeadingTag = `h${props.level}`;
-  const [isCopied, setCopied] = useClipboard(SITE_URL+"#"+props.id, {
-    successDuration: 1000
-  })
   return (
-    <HeadingTag id={props.id}>
-      {props.children}
-      <a 
-        onClick={setCopied} 
-        className={"copy-to-clipboard" + (isCopied ? " copied" : "")}
-      >
-      </a>
+    <HeadingTag className="heading-tag" id={props.id}>
+      <Link href={"#"+props.id} passHref>
+        <a className="heading-link">
+          {props.children}
+        </a>
+      </Link>
     </HeadingTag>
   )
 }
@@ -166,13 +162,38 @@ export default function PostPage({ source, frontMatter, toc }) {
   const activeId = useActiveId(idList);
   return (
     <Fragment>
-		<div className="main-container flex justify-center items-center flex-col">
-        <h1 className="text-black text-6xl font-bold max-w-screen-md text-center">{frontMatter.title}</h1>
+		<div className="main-container justify-center items-center flex">
+			<div className="max-w-screen-sm mx-auto">
+				<h1 className="text-blue-500 text-lg mb-0 mt-0 uppercase font-bold text-center tracking-tight">{frontMatter.title}</h1>
         {frontMatter.description && (
-          <p className="text-xl text-black mt-4 pb-6 text-center">
+          <p className="text-5xl text-black text-center mt-0 font-bold pb-0 mb-6 text-center">
             {frontMatter.description}
           </p>
         )}
+				<div className="text-center text-gray-600 mt-6 mb-6">
+					{frontMatter?.date}	
+				</div>
+				<div className="mt-2 flex justify-center">
+					<div className="flex items-center mr-2">
+						<Image src="/cernocky.png" height={32} width={32} />
+						<div className="ml-2">
+							<div className="font-semibold text-black text-base">
+								Dalibor Cernocky
+							</div>
+							<div className="mt-0 text-sm">
+								<Link href="https://twitter.com/cernockyd" passHref>
+									<a className="text-blue-500">@cernockyd</a>
+								</Link>
+							</div>
+						</div>
+					</div>
+				</div>
+        {frontMatter.abstract && (
+          <p className="text-black text-center mt-0 pb-2 text-lg">
+            {frontMatter.abstract}
+          </p>
+        )}
+			</div>
     </div>
     <div className="nextra-container main-container flex flex-col">
     <div className="flex flex-1 h-full justify-end">

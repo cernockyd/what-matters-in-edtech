@@ -11,7 +11,7 @@ module.exports = {
       '2xl': '1536px'
     },
     fontFamily: {
-      sans: ['EDTECH', ...fontFamily.sans],
+      sans: ['Inter', ...fontFamily.sans],
     },
     letterSpacing: {
       tight: '-0.015em'
@@ -104,7 +104,7 @@ module.exports = {
         200: '#bee3f8',
         300: '#90cdf4',
         400: '#63b3ed',
-        500: '#4299e1',
+        500: '#0070f3',
         600: '#3182ce',
         700: '#2b6cb0',
         800: '#2c5282',
