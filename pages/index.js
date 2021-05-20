@@ -64,8 +64,7 @@ function getHeadings(items) {
   }, {});
 }
 
-function useActiveId(itemIds) {
-  const [activeId, setActiveId] = useState(`test`);
+function useActiveId(itemIds, activeId, setActiveId) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -86,11 +85,10 @@ function useActiveId(itemIds) {
       });
     };
   }, [itemIds]);
-  console.log(activeId)
   return activeId;
 }
 
-function renderItems(items, activeId, depth) {
+function renderItems(items, activeId, setActiveId, depth) {
   if (depth >= 5)
     return null
   return (
@@ -103,10 +101,11 @@ function renderItems(items, activeId, depth) {
           >
             <a
               href={'#' + item.slug}
+              onClick={() => setActiveId('#'+item.slug)}
             >
               {item.value}
             </a>
-            {item.children && renderItems(item.children, activeId, depth+1)}
+            {item.children && renderItems(item.children, activeId, setActiveId, depth+1)}
           </li>
         );
       })}
@@ -114,10 +113,10 @@ function renderItems(items, activeId, depth) {
   );
 }
 
-function TableOfContents({activeId, items}) {
+function TableOfContents({activeId, items, setActiveId}) {
   //console.log(idList)
   return (
-    renderItems(items, activeId, 1)
+    renderItems(items, activeId, setActiveId, 1)
   );
 }
 
@@ -157,9 +156,31 @@ function eachRecursive(list)
 
 export default function PostPage({ source, frontMatter, toc }) {
   const content = hydrate(source, { components })
-  const idList = getIds(toc);
+  const itemIds = getIds(toc);
   const headingsList = getHeadings(toc);
-  const activeId = useActiveId(idList);
+  const [activeId, setActiveId] = useState(``);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: `0% 0% -100% 0%` }
+    );
+    itemIds.forEach((id) => {
+      observer.observe(document.getElementById(id));
+    });
+    return () => {
+      itemIds.forEach((id) => {
+        observer.unobserve(document.getElementById(id));
+      });
+    };
+  }, [itemIds]);
+
   return (
     <Fragment>
 		<div className="main-container justify-center items-center flex">
@@ -206,7 +227,7 @@ export default function PostPage({ source, frontMatter, toc }) {
       </div>
       <aside style={{top: '0rem', height: '100vh'}} className="h-screen bg-white dark:bg-dark flex-shrink-0 w-full md:w-64 md:block fixed md:sticky z-10 hidden">
         <div className="sidebar border-gray-200 dark:border-gray-900 w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto">
-        <TableOfContents items={toc} activeId={activeId} />
+        <TableOfContents items={toc} activeId={activeId} setActiveId={setActiveId} />
         </div>
       </aside>
     </div>

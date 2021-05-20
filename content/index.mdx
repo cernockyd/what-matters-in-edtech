@@ -42,3 +42,67 @@ The second most common usage of the term, according to Kline (1985), is to repre
 
 Especially in the field of education, ”our primary focus should not be on the actual technological devices, tools and applications per se, but the practices and activities that surround them, the meanings that people attach to them, and the social relations and structures that these technologies are linked to.” (Selwyn, 2017)
 
+# Drivers of EdTech
+
+## Digitalization
+
+The term digitalization has a variety of meanings. The technical interpretation of the term refers to conversion of information from the analog to the digital storage. (Hess, 2019; Hess et al., 2016) Today its often used for introduction of digital technologies in companies. (Pousttchi, 2017)
+
+The term digitalization have a variety of meanings. The technical interpretation of the term refers to conversion of information from the analog to the digital storage. (Hess, 2019; Hess et al., 2016) Today its often used for introduction of digital technologies in companies.
+
+Since digitalization leads to change of a business conditions, digitalization is usually the main driver of digital transformation. (Pousttchi, 2017)
+
+Exponential growth
+
+The exponential growth of technology is perhaps the most discussed characteristic of digital transformation The growth itself is shown in various metrics, while the most popular is observation of growing number of transistors on microchips described by the Moore's law. 
+
+One of the main characteristics of digital transformation and industrial revolution 4.0. is observed exponential growth and associated compounding effect.
+
+## Digital transformation
+
+The term digitalization is known to be sometimes used with the meaning of digital transformation. (Hess et al., 2016) “There is no comonly accepted definition of digital transformation”. (Schallmo et al., 2017) A concievable description of digital transformation may be "significant active changes in everyday life, the economy and society through the use of digital technologies and techniques and their effects." (Pousttchi, 2017) Based on existing definitions, Vial (2019) developed a more general conceptual definition of digital transformation as “a process that aims to improve an entity by triggering significant changes to its properties through combinations of information, computing, communication, and connectivity technologies”. 
+
+It is important to note the indirectly mentioned fact from the work of Pousttchi (2017), that increase in digital technology usage or digitalisation alone, does not imply the presence of digital transformation in its full range and potential. The case o Covid-19 is referred to as an example of disruption as many people and organisations adopted using technology in a short period since they had no other option. Sudden adoption, however, did not bring about a fundamental transformation of existing practices. Since digitalization leads to change of a business conditions, digitalization is the main driver of digital transformation. (Pousttchi, 2017)
+
+There is no doubt that digitalization leads to bigger effectivity in many areas, but it is increasingly necessary not to focus merely on the advances in term of technological progress. (Vial, 2019; Mergel et al., 2019) "Technology is one part of the complex system to be solved for organizations to remain competitive in a digital world" (Vial, 2019) The question of "how to embrace it and use it as a competitive advantage" is considered as one of the biggest challenges companies currently face. (Hess et al., 2016)
+
+As Vial's (2019) conceptual definition reffers DT to any entity, the process of DT applies to organizations and companies as well as individuals. In companies DT implies the need to embrace complexity with a new mindset.
+
+setting the DT is "reflected in the change of entire business models brought about by digital technologies". (Hess et al., 2016)
+
+The purpose of education
+
+# Methodology
+
+## Private companies data
+Finding information about private companies is challenging. The author decided to leverage the database of innovative companies "maintained by Crunchbase Inc. a company founded in 2007 by Michael Arrington and located in San Francisco, California". The company, now being an independent entity is a former branch of a parent company TechCrunch Inc. "a popular online publication". (Ferrati & Muffatto, 2020)
+
+The database is increasingly used by the venture capital industry. Between researchers and scholars, the database is increasingly popular "as a source of information on start-up activity and financing within and across countries". "More than 90 scientific contributions based on its data have been made available so far." Some of the academic articles are already published in top-tier journals. (Using Crunchbase for Economic and Managerial Research, 2017)
+
+The Crunchbase data is mainly entered on a voluntary basis, the scope and coverage of the database are not precisely defined. (Ferrati & Muffatto, 2020; Using Crunchbase for Economic and Managerial Research, 2017) Crunchbase data collection consists of 4 activities: 1) "more than 3,700 investment firms submit monthly portfolio updates", 2) active community of executives, entrepreneurs, and investors contributing, 3) Crunchbase AI and ML algorithms validate data and search for anomalies, 4) Crunchbase in-house data science team provide manual data validation and curation of collected data and develops algorithms. (‘The Crunchbase Data Difference’, 2017; Ferrati & Muffatto, 2020)
+
+The "aggregate statistics on VC funding by country and year tend to be reasonably similar to the same figures produced with an alternative and more established source". Compared to other alternatives, the Crunchbase database "does not require a huge amount of data handling before it can be used for econometric analysis". (Using Crunchbase for Economic and Managerial Research, 2017)
+
+As of May 21, 2019, the Crunchbase corpus contained a total of 760,590 records in the Organisation’s dataset and 263,426 records in the Funding rounds dataset. Of the total number of companies approximately 79.9% do not declare any funding round, 5.5% have at least one funding round without funding amount specified and 14.6% have at least one funding round and are declaring the total funding amount. (Ferrati & Muffatto, 2020) The platform allows users to filter companies and funding rounds by industries. A brief database query was resolved with ~ 4,377 funding rounds for companies classified in the EdTech industry, while 3,261 of them have defined funding amount.  
+
+The dataset of funding rounds for further analysis was obtained using an export feature from the database which returns a .csv file corresponding to a selected query. Since the platform proclaims an export limit of 500 items per request, the author obtained the dataset in chucks to prevent hitting the limit and then constructed the dataset by concatenating the .csv files.
+
+## Data processing
+
+The data processing was done using Python3 and popular data science SciPy libraries, namely:
+
+- NumPy: "the fundamental package for numerical computation. It defines the numerical array and matrix types and basic operations on them."
+- Pandas: "providing high-performance, easy-to-use data structures.",
+- Matplotlib: "a mature and popular plotting package that provides publication-quality 2-D plotting, as well as rudimentary 3-D plotting." (Scipy.org)
+
+The author has done basic data preprocessing, like automatically trying to request the company URL and check if the website returns status 200. That eliminated dozens of companies from the list.
+
+Raised capital amounts we converted to current value `for which date?` and US dollars to ensure amounts comparability.
+
+### Inflation adjustment
+
+A $1 in March 2010 has the same buying power as ~ $1.22 in March 2021. In order to make the funding amounts comparable, the author performed an inflation adjustment correction on them, for March 2021, using the monthly consumer prices inflation in the United States. Inflation reflects the percentage change over time in the cost of acquiring a basket of goods and services for the average consumer. The inflation may be fixed or changed at specified intervals based on the use case. (The World Bank Group, 2021) “The Consumer Price Index (CPI) is a measure of the average change over time in the prices paid by urban consumers for a market basket of consumer goods and services.” (Bureau of Labor Statistics, U.S. Department of Labor, 2017)
+
+The CPI for All Urban Consumers (CPI-U), monthly U.S. city average with the base period 1982-84=100 was selected to compute the inflation rate for the adjustment. There are many indexes that could be used to determine the inflation rate, they should be close to similar for the purpose of this thesis. The CPI-U index is commonly reported by the national media. (Bureau of Labor Statistics, U.S. Department of Labor, 2019) According to the Czech Statistical Office (2021), the monthly CPI is frequently used. The monthly periodicity also appears to be the most granular option available in the U.S. Department of Labor Data Retrieval Tool.
+
+
