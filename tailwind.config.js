@@ -21,6 +21,7 @@ module.exports = {
       current: 'currentColor',
       black: '#000',
       white: '#fff',
+      brand: '#0000dc',
 			mahogany: {
 				'50': '#EF6363',
 				'100': '#ED4C4C',

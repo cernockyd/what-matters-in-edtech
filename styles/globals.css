@@ -139,7 +139,6 @@ a code {
 .dark .sidebar li.active > a {
   @apply text-white;
 }
-.sidebar button,
 .sidebar a {
   @apply block w-full text-left text-base no-underline text-gray-600 mb-4 mt-2 rounded select-none outline-none;
   -webkit-tap-highlight-color: transparent;
@@ -154,16 +153,13 @@ a code {
 .dark .sidebar .sidebar-title {
   @apply text-red-400;
 }
-.dark .sidebar button,
 .dark .sidebar a {
   @apply text-gray-500;
 }
-.sidebar a:hover,
-.sidebar button:hover {
+.sidebar a:hover {
   @apply text-gray-900;
 }
-.dark .sidebar a:hover,
-.dark .sidebar button:hover {
+.dark .sidebar a:hover {
   @apply text-white bg-gray-900;
 }
 
