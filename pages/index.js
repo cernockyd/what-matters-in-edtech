@@ -183,7 +183,7 @@ export default function PostPage({ source, frontMatter, toc }) {
 
   return (
     <Fragment>
-		<div className="justify-center items-center flex mt-20 pb-16 mb-16 border-b">
+		<div className="justify-center items-center flex pb-16 h-screen border-b">
 			<div className="max-w-screen-sm mx-auto">
         {frontMatter.description && (
           <h1 className="text-4xl text-black text-center mt-0 font-bold pb-0 mb-6 text-center">
@@ -207,7 +207,6 @@ export default function PostPage({ source, frontMatter, toc }) {
 							</div>
 						</div>
 					</div>
-					{/*
             <div className="flex items-center ml-4">
 						<Image src="/eduinteres.jpg" className="border border-gray-300 rounded-full" height={32} width={32} />
 						<div className="ml-2">
@@ -222,7 +221,6 @@ export default function PostPage({ source, frontMatter, toc }) {
 							</div>
 						</div>
 					</div>
-          */}
 					<div className="flex items-center ml-4">
 						<Image src="/muni.png" className="border border-gray-300 rounded-full" height={32} width={32} />
 						<div className="ml-2">
@@ -244,11 +242,6 @@ export default function PostPage({ source, frontMatter, toc }) {
     </div>
     <div className="nextra-container main-container flex flex-col">
     <div className="flex flex-1 h-full justify-end">
-      <article className="docs-container prose relative pb-6 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
-          <main className="max-w-screen-sm mx-auto">
-            {content}
-          </main>
-        </article>
       <aside style={{top: '0rem', height: '100vh'}} className="h-screen bg-white dark:bg-dark flex-shrink-0 w-full md:w-64 md:block fixed md:sticky z-10 hidden">
         <div className="sidebar border-gray-200 flex flex-col justify-between dark:border-gray-900 w-full p-4 pb-6 pt-6 md:pb-6 h-full overflow-y-auto">
           <TableOfContents items={toc} activeId={activeId} setActiveId={setActiveId} />
@@ -265,6 +258,11 @@ export default function PostPage({ source, frontMatter, toc }) {
           </div>
         </div>
       </aside>
+      <article className="docs-container prose relative pb-6 px-6 md:px-8 w-full pt-16 max-w-full overflow-x-hidden">
+          <main className="max-w-screen-sm mx-auto">
+            {content}
+          </main>
+        </article>
     </div>
     </div>
     </Fragment>

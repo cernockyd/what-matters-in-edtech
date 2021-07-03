@@ -326,7 +326,7 @@ code {
 
 /* Table */
 table {
-  @apply p-0;
+  @apply p-0 text-black;
 }
 table tr {
   @apply m-0 p-0 border-t border-gray-300;
@@ -350,7 +350,7 @@ table tr td[align='right'] {
 table tr th,
 table tr td {
   @apply text-left;
-  @apply m-0 px-4 py-2 border border-gray-300;
+  @apply m-0 px-2 py-1 border border-gray-300;
   @apply dark:border-gray-700;
 }
 .table-container {
@@ -381,7 +381,7 @@ pre .prism-code .token.constant {
 .dark pre .prism-code .token.builtin,
 .dark pre .prism-code .token.char,
 .dark pre .prism-code .token.constant {
-  color: #fff !important;
+  olor: #fff !important;
 }
 pre .prism-code .token.string,
 pre .prism-code .token.url,
@@ -427,15 +427,15 @@ pre .prism-code .token.tag:not(.script) {
   @apply pr-6 border-r-2 pl-0 border-l-0;
 }
 .nextra-container:not(.rtl) article.docs-container {
-  @apply xl:pl-72;
+  @apply xl:pr-72;
 }
 .nextra-container.rtl .docs-container {
-  @apply xl:pl-72;
+  @apply xl:pr-72;
 }
 @screen md {
   .nextra-container article.docs-container .bleed.full {
-    margin-right: calc(-50vw + 50% + 8rem);
     margin-left: calc(-50vw + 50% + 8rem);
+    margin-right: calc(-50vw + 50% + 8rem);
   }
   .nextra-container.rtl .sidebar button,
   .nextra-container.rtl .sidebar a {
@@ -444,12 +444,12 @@ pre .prism-code .token.tag:not(.script) {
 }
 @screen xl {
   .nextra-container:not(.rtl) article.docs-container .bleed.full {
-    margin-right: calc(50% - 50vw + 16rem);
-    margin-left: calc(50% - 50vw);
+    margin-left: calc(50% - 50vw + 16rem);
+    margin-right: calc(50% - 50vw);
   }
   .nextra-container.rtl .docs-container .bleed.full {
-    margin-right: calc(50% - 50vw);
-    margin-left: calc(50% - 50vw + 16rem);
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw + 16rem);
   }
 }
 .nextra-container.rtl code {
