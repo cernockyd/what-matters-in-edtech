@@ -183,7 +183,7 @@ export default function PostPage({ source, frontMatter, toc }) {
 
   return (
     <Fragment>
-		<div className="justify-center items-center flex pb-16 h-screen border-b">
+		<div className="justify-center items-center flex pb-16 min-h-screen border-b">
 			<div className="max-w-screen-sm mx-auto">
         {frontMatter.description && (
           <h1 className="text-4xl text-black text-center mt-0 font-bold pb-0 mb-6 text-center">
